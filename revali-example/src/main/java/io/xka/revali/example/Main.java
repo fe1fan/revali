@@ -1,4 +1,4 @@
-package io.xka;
+package io.xka.revali.example;
 
 public class Main {
     public static void main(String[] args) {
