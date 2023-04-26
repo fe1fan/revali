@@ -1,2 +1,5 @@
 rootProject.name = 'revali'
+include 'revali-web'
+include 'revali-data'
+include 'revali-example'
 
