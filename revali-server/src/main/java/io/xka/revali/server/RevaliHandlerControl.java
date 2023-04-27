@@ -145,6 +145,7 @@ public class RevaliHandlerControl {
         response.setContentType(mediaType);
         try (OutputStream outputStream = response.getOutputStream()) {
             inputStream.transferTo(outputStream);
+            outputStream.flush();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
