@@ -25,12 +25,14 @@ public class RevaliServer implements RevaliConfigurationTarget {
     public RevaliServerControl startup() {
         final String bind = serverConfiguration.getHost();
         final int port = serverConfiguration.getPort();
+        final String path = serverConfiguration.getPath();
         final int ioThreads = serverConfiguration.getThread().getIo();
         final int workerThreads = serverConfiguration.getThread().getWorker();
 
+
         logger.info("Starting server on {}:{}", bind, port);
         //server
-        QueuedThreadPool queuedThreadPool = new QueuedThreadPool(workerThreads, workerThreads, 60000);
+        QueuedThreadPool queuedThreadPool = new QueuedThreadPool(Math.max(workerThreads, 17), Math.max(workerThreads, 17), 60000);
         this.server = new Server(queuedThreadPool);
         //connector
         ServerConnector connector = new ServerConnector(server, ioThreads, ioThreads);
@@ -40,7 +42,7 @@ public class RevaliServer implements RevaliConfigurationTarget {
         this.server.addConnector(connector);
         //http
         ServletContextHandler servletHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletHandler.setContextPath("/");
+        servletHandler.setContextPath(path);
         ServletHolder servletHolder = servletHandler.addServlet(RevaliHandler.class, "/*");
         servletHolder.getRegistration().setMultipartConfig(
                 new MultipartConfigElement(System.getProperty("java.io.tmpdir"))
@@ -104,5 +106,10 @@ public class RevaliServer implements RevaliConfigurationTarget {
     @Override
     public void setConfiguration(RevaliConfiguration<? extends RevaliConfigurationTarget> configuration) {
         this.serverConfiguration = (RevaliServerConfiguration) configuration;
+    }
+
+    @Override
+    public Class<? extends RevaliConfiguration<? extends RevaliConfigurationTarget>> getConfigurationClass() {
+        return RevaliServerConfiguration.class;
     }
 }

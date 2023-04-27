@@ -13,4 +13,12 @@ public class RevaliServerBuilder {
                 configurations
         );
     }
+
+    public static RevaliServer yaml(String yaml) {
+        return RevaliConfigurationBuilder.yaml(
+                new TypeReference<>() {
+                },
+                yaml
+        );
+    }
 }

@@ -13,6 +13,8 @@ dependencies {
     //lombok
     compileOnly "org.projectlombok:lombok:1.18.20"
     annotationProcessor "org.projectlombok:lombok:1.18.20"
+    //jackson databind yaml
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
