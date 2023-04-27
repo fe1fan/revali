@@ -1,5 +1,7 @@
 package io.xka.revali.server;
 
+import io.xka.revali.core.RevaliConfiguration;
+import io.xka.revali.core.RevaliConfigurationTarget;
 import jakarta.servlet.MultipartConfigElement;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -9,32 +11,29 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RevaliServer {
+public class RevaliServer implements RevaliConfigurationTarget {
 
     private final Logger logger = LoggerFactory.getLogger(RevaliServer.class);
 
-    private String bind;
-    private int port;
-    private String[] args;
+    private RevaliServerConfiguration serverConfiguration;
 
     private Server server;
 
     private boolean isRunning = false;
 
 
-    public RevaliServer(String bind, int port, String[] args) {
-        this.bind = bind;
-        this.port = port;
-        this.args = args;
-    }
-
     public RevaliServerControl startup() {
+        final String bind = serverConfiguration.getHost();
+        final int port = serverConfiguration.getPort();
+        final int ioThreads = serverConfiguration.getThread().getIo();
+        final int workerThreads = serverConfiguration.getThread().getWorker();
+
         logger.info("Starting server on {}:{}", bind, port);
         //server
-        QueuedThreadPool queuedThreadPool = new QueuedThreadPool(30, 10, 60000);
+        QueuedThreadPool queuedThreadPool = new QueuedThreadPool(workerThreads, workerThreads, 60000);
         this.server = new Server(queuedThreadPool);
         //connector
-        ServerConnector connector = new ServerConnector(server, 8, 8);
+        ServerConnector connector = new ServerConnector(server, ioThreads, ioThreads);
         connector.setHost(bind);
         connector.setPort(port);
         connector.setAcceptQueueSize(100);
@@ -100,5 +99,10 @@ public class RevaliServer {
     public void restart() {
         this.shutdown();
         this.run();
+    }
+
+    @Override
+    public void setConfiguration(RevaliConfiguration<? extends RevaliConfigurationTarget> configuration) {
+        this.serverConfiguration = (RevaliServerConfiguration) configuration;
     }
 }

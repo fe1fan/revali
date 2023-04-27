@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'io.xka'
+group = 'io.xka.revali.core'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -10,9 +10,9 @@ repositories {
 }
 
 dependencies {
-    //import server models
-    implementation project(path: ':revali-core')
-    implementation project(path: ':revali-server')
+    //lombok
+    compileOnly "org.projectlombok:lombok:1.18.20"
+    annotationProcessor "org.projectlombok:lombok:1.18.20"
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }

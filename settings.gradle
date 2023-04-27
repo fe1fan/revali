@@ -3,4 +3,5 @@ include 'revali-server'
 include 'revali-client'
 include 'revali-data'
 include 'revali-example'
+include 'revali-core'
 
