@@ -1,5 +1,7 @@
 package io.xka.revali.core;
 
+import io.xka.revali.core.configuration.RevaliConfigurationTarget;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 

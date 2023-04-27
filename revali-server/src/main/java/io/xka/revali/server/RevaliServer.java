@@ -1,7 +1,7 @@
 package io.xka.revali.server;
 
-import io.xka.revali.core.RevaliConfiguration;
-import io.xka.revali.core.RevaliConfigurationTarget;
+import io.xka.revali.core.configuration.RevaliConfiguration;
+import io.xka.revali.core.configuration.RevaliConfigurationTarget;
 import jakarta.servlet.MultipartConfigElement;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;

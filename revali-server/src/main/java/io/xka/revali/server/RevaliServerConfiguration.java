@@ -1,6 +1,6 @@
 package io.xka.revali.server;
 
-import io.xka.revali.core.RevaliConfiguration;
+import io.xka.revali.core.configuration.RevaliConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

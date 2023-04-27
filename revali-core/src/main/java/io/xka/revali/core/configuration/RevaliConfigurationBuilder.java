@@ -1,7 +1,8 @@
-package io.xka.revali.core;
+package io.xka.revali.core.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import io.xka.revali.core.TypeReference;
 
 import java.io.File;
 

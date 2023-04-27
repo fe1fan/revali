@@ -2,10 +2,9 @@ package io.xka.revali.example;
 
 import io.xka.revali.server.RevaliServer;
 import io.xka.revali.server.RevaliServerBuilder;
-import io.xka.revali.server.RevaliServerConfiguration;
 import io.xka.revali.server.RevaliServerControl;
 
-public class Main {
+public class ServerExample {
     public static void main(String[] args) {
 //        RevaliServer server = RevaliServerBuilder.configs(
 //                RevaliServerConfiguration
