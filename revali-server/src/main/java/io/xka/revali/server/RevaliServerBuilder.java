@@ -1,14 +1,16 @@
 package io.xka.revali.server;
 
 import io.xka.revali.core.RevaliConfiguration;
+import io.xka.revali.core.RevaliConfigurationBuilder;
+import io.xka.revali.core.TypeReference;
 
 public class RevaliServerBuilder {
     @SafeVarargs
     public static RevaliServer configs(RevaliConfiguration<RevaliServer>... configurations) {
-        RevaliServer revaliServer = new RevaliServer();
-        for (RevaliConfiguration<RevaliServer> configuration : configurations) {
-            configuration.configure(revaliServer);
-        }
-        return revaliServer;
+        return RevaliConfigurationBuilder.configs(
+                new TypeReference<>() {
+                },
+                configurations
+        );
     }
 }
