@@ -13,7 +13,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RevaliHandlerControl {
     private final HttpServletRequest request;
@@ -53,7 +56,20 @@ public class RevaliHandlerControl {
      * @return query object
      */
     public <T> T getQuery(Class<? extends T> clazz) {
-        return null;
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        Map<String, Object> convertMap = new HashMap<>(parameterMap.size());
+        parameterMap.forEach(
+                (key, value) -> {
+                    if (value.length < 2) {
+                        convertMap.put(key, value[0]);
+                    }
+                    if (value.length > 1) {
+                        convertMap.put(key, Arrays.stream(value).collect(Collectors.toList()));
+                    }
+                }
+        );
+        String body = serializationAdopter.toJson(convertMap);
+        return serializationAdopter.toObj(body, clazz);
     }
 
     /**
@@ -82,6 +98,19 @@ public class RevaliHandlerControl {
     }
 
     /**
+     * get all cookies
+     *
+     * @return all cookies
+     */
+    public String[] getCookies() {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return null;
+        }
+        return Arrays.stream(cookies).map(Cookie::getValue).toArray(String[]::new);
+    }
+
+    /**
      * get request body
      *
      * @return request body
@@ -99,6 +128,10 @@ public class RevaliHandlerControl {
     }
 
     public <T> T getBody(Class<? extends T> clazz) {
+        String body = getBody();
+        if (body != null) {
+            return serializationAdopter.toObj(body, clazz);
+        }
         return null;
     }
 
