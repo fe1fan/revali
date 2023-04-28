@@ -3,7 +3,7 @@
 ![gradle build](https://github.com/fe1fan/revali/actions/workflows/gradle.yml/badge.svg)
 ![size](https://img.shields.io/github/languages/code-size/fe1fan/revali)
 ![last commit](https://img.shields.io/github/last-commit/fe1fan/revali)
-
+![license](https://img.shields.io/github/license/fe1fan/revali)
 
 A fast and simple web framework for Java.
 
