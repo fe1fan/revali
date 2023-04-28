@@ -48,7 +48,7 @@ public class Example {
 
     public static void main(String[] args) {
         // create a server from yaml file
-        RevaliServer server = RevaliServerBuilder.yaml("bootstrap.yaml");
+        RevaliServer server = RevaliServer.yaml("bootstrap.yaml");
         // start the server
         RevaliServerControl startup = server.startup();
         // add a get route

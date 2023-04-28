@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class ServerExample {
     public static void main(String[] args) {
-        RevaliServer server = RevaliServerBuilder.yaml("bootstrap.yaml");
+        RevaliServer server = RevaliServer.yaml("bootstrap.yaml");
 
         RevaliServerControl startup = server.startup();
         startup.get("/test", control -> {
