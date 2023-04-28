@@ -16,10 +16,15 @@ A fast and simple web framework for Java.
 - [revali-client](revali-client) - A simple http client for revali.
 - [revali-data](revali-data) - A simple data access layer for revali.
 
+### Latest Version
+```
+NONE
+```
+
 ### Usage with Gradle
 
 ```groovy
-implementation 'io.xka.revali:revali-[model]:[version]'
+implementation 'io.xka.revali:revali-[model]:[latest version]'
 ```
 
 ### Usage with Maven
@@ -28,7 +33,7 @@ implementation 'io.xka.revali:revali-[model]:[version]'
 <dependency>
     <groupId>io.xka.revali</groupId>
     <artifactId>revali-[model]</artifactId>
-    <version>[version]</version>
+    <version>[latest version]</version>
 </dependency>
 ```
 
