@@ -8,20 +8,6 @@ import java.util.HashMap;
 
 public class ServerExample {
     public static void main(String[] args) {
-//        RevaliServer server = RevaliServerBuilder.configs(
-//                RevaliServerConfiguration
-//                        .builder()
-//                        .host("127.0.0.1")
-//                        .port(8888)
-//                        .thread(
-//                                RevaliServerConfiguration.Thread
-//                                        .builder()
-//                                        .io(8)
-//                                        .worker(32)
-//                                        .build()
-//                        )
-//                        .build()
-//        );
         RevaliServer server = RevaliServerBuilder.yaml("bootstrap.yaml");
 
         RevaliServerControl startup = server.startup();
