@@ -1,9 +1,9 @@
 # <img src=logo.png width=100 height=100/> Revali
 
-![gradle build](https://github.com/fe1fan/revali/actions/workflows/gradle.yml/badge.svg)
+![gradle build](https://github.com/fe1fan/revali/actions/workflows/gradle.yml/badge.svg?branch=master)
 ![size](https://img.shields.io/github/languages/code-size/fe1fan/revali)
-![last commit](https://img.shields.io/github/last-commit/fe1fan/revali)
-![license](https://img.shields.io/github/license/fe1fan/revali)
+![last commit](https://img.shields.io/github/last-commit/fe1fan/revali?color=blue)
+![license](https://img.shields.io/github/license/fe1fan/revali?color=blue)
 
 A fast and simple web framework for Java.
 
