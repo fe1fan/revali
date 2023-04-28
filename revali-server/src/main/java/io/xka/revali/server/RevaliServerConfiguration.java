@@ -19,6 +19,8 @@ public class RevaliServerConfiguration implements RevaliConfiguration<RevaliServ
     private String path = "/";
     @Builder.Default
     private Thread thread = new Thread();
+    @Builder.Default
+    private Serialization serialization = new Serialization();
 
     @Data
     @Builder
@@ -29,5 +31,20 @@ public class RevaliServerConfiguration implements RevaliConfiguration<RevaliServ
         private int io = 1;
         @Builder.Default
         private int worker = 10;
+    }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Serialization {
+
+        @Builder.Default
+        private Type type = Type.JACKSON;
+
+        public enum Type {
+            JACKSON
+        }
+
     }
 }

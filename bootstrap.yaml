@@ -3,3 +3,5 @@ port: 8888
 thread:
   io: 8
   worker: 30
+serialization:
+  type: JACKSON

@@ -2,6 +2,8 @@ package io.xka.revali.server;
 
 import io.xka.revali.core.configuration.RevaliConfiguration;
 import io.xka.revali.core.configuration.RevaliConfigurationTarget;
+import io.xka.revali.core.serialization.JacksonImpl;
+import io.xka.revali.core.serialization.SerializationAdopter;
 import jakarta.servlet.MultipartConfigElement;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -32,7 +34,8 @@ public class RevaliServer implements RevaliConfigurationTarget {
 
         logger.info("Starting server on {}:{}", bind, port);
         //server
-        QueuedThreadPool queuedThreadPool = new QueuedThreadPool(Math.max(workerThreads, 17), Math.max(workerThreads, 17), 60000);
+        final int finalWorkThreads = Math.max(workerThreads, 17);
+        QueuedThreadPool queuedThreadPool = new QueuedThreadPool(finalWorkThreads, finalWorkThreads, 60000);
         this.server = new Server(queuedThreadPool);
         //connector
         ServerConnector connector = new ServerConnector(server, ioThreads, ioThreads);
@@ -43,6 +46,16 @@ public class RevaliServer implements RevaliConfigurationTarget {
         //http
         ServletContextHandler servletHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         servletHandler.setContextPath(path);
+        //serialize
+        SerializationAdopter serializationAdopter = null;
+        switch (serverConfiguration.getSerialization().getType()) {
+            case JACKSON:
+                serializationAdopter = new SerializationAdopter(new JacksonImpl());
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + serverConfiguration.getSerialization().getType());
+        }
+        RevaliHandler.serializationAdopter = serializationAdopter;
         ServletHolder servletHolder = servletHandler.addServlet(RevaliHandler.class, "/*");
         servletHolder.getRegistration().setMultipartConfig(
                 new MultipartConfigElement(System.getProperty("java.io.tmpdir"))

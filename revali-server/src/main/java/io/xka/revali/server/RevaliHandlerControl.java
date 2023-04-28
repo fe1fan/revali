@@ -1,5 +1,6 @@
 package io.xka.revali.server;
 
+import io.xka.revali.core.serialization.SerializationAdopter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.Cookie;
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class RevaliHandlerControl {
     private final HttpServletRequest request;
     private final HttpServletResponse response;
+    private final SerializationAdopter serializationAdopter;
 
-    public RevaliHandlerControl(HttpServletRequest request, HttpServletResponse response) {
+    public RevaliHandlerControl(HttpServletRequest request, HttpServletResponse response, SerializationAdopter serializationAdopter) {
         this.request = request;
         this.response = response;
+        this.serializationAdopter = serializationAdopter;
     }
 
     protected HttpServletRequest getRequest() {
@@ -128,14 +131,18 @@ public class RevaliHandlerControl {
     public void result(String context) {
         try (PrintWriter writer = response.getWriter()) {
             writer.println(context);
+            writer.flush();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
 
     public void json(Object obj) {
+        response.setContentType("application/json");
         try (PrintWriter writer = response.getWriter()) {
-            writer.println(obj);
+            String json = serializationAdopter.toJson(obj);
+            writer.println(json);
+            writer.flush();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

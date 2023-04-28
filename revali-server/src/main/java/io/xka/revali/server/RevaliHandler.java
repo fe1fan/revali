@@ -1,5 +1,6 @@
 package io.xka.revali.server;
 
+import io.xka.revali.core.serialization.SerializationAdopter;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +9,8 @@ import org.eclipse.jetty.http.HttpMethod;
 import java.util.function.Consumer;
 
 public class RevaliHandler extends HttpServlet {
+
+    protected static SerializationAdopter serializationAdopter;
 
     private void handle(HttpServletRequest req, HttpServletResponse resp) {
         String path = req.getRequestURI().substring(req.getContextPath().length());
@@ -38,7 +41,7 @@ public class RevaliHandler extends HttpServlet {
                 method = HttpMethod.GET;
         }
         Consumer<RevaliHandlerControl> capture = RevaliMappings.capture(path, method);
-        capture.accept(new RevaliHandlerControl(req, resp));
+        capture.accept(new RevaliHandlerControl(req, resp, serializationAdopter));
     }
 
     @Override
