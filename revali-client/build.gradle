@@ -10,6 +10,12 @@ repositories {
 }
 
 dependencies {
+    implementation project(path: ':revali-core')
+    //jetty-client
+    implementation 'org.eclipse.jetty:jetty-client:11.0.6'
+    //lombok
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }

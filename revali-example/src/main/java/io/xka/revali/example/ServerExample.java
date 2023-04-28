@@ -11,6 +11,10 @@ public class ServerExample {
         RevaliServer server = RevaliServer.yaml("bootstrap.yaml");
 
         RevaliServerControl startup = server.startup();
+        //echo server
+        startup.get("/echo", control -> {
+            control.result(control.getQuery("echo"));
+        });
         startup.get("/test", control -> {
             control.result("hello world");
         });
