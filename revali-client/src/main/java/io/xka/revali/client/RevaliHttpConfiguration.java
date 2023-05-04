@@ -19,5 +19,7 @@ public class RevaliHttpConfiguration implements RevaliConfiguration<RevaliHttpCl
     @NoArgsConstructor
     @AllArgsConstructor
     static class Pool {
+        private int minIdle;
+        private int maxTotal;
     }
 }
