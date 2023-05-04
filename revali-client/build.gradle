@@ -12,7 +12,7 @@ repositories {
 dependencies {
     implementation project(path: ':revali-core')
     //jetty-client
-    implementation 'org.eclipse.jetty:jetty-client:11.0.6'
+    implementation 'org.eclipse.jetty:jetty-client:11.0.6' exclude(module: 'slf4j-api')
     //lombok
     implementation 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'

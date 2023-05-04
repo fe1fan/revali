@@ -32,7 +32,7 @@ public class RevaliServer extends RevaliServerBuilder implements RevaliConfigura
         final int workerThreads = serverConfiguration.getThread().getWorker();
 
 
-        logger.info("Starting server on {}:{}", bind, port);
+        logger.info("Starting server on http://{}:{}", bind, port);
         //server
         final int finalWorkThreads = Math.max(workerThreads, 17);
         QueuedThreadPool queuedThreadPool = new QueuedThreadPool(finalWorkThreads, finalWorkThreads, 60000);

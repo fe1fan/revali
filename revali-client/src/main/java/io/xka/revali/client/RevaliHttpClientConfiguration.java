@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RevaliHttpConfiguration implements RevaliConfiguration<RevaliHttpClient> {
+public class RevaliHttpClientConfiguration implements RevaliConfiguration<RevaliHttpClient> {
 
     private Pool pool;
 
