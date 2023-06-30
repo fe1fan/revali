@@ -8,7 +8,7 @@ import java.io.File;
 
 public class RevaliConfigurationBuilder<T extends RevaliConfigurationTarget> {
 
-    @SuppressWarnings("all")
+    @SuppressWarnings("unchecked")
     public static <T extends RevaliConfigurationTarget> T configs(TypeReference<T> typeReference, RevaliConfiguration<T>... configurations) {
         Class<? extends RevaliConfigurationTarget> rawClass = (Class<? extends RevaliConfigurationTarget>) typeReference.getType();
         try {
@@ -22,7 +22,7 @@ public class RevaliConfigurationBuilder<T extends RevaliConfigurationTarget> {
         }
     }
 
-    @SuppressWarnings("all")
+    @SuppressWarnings("unchecked")
     public static <T extends RevaliConfigurationTarget> T yaml(TypeReference<T> typeReference, String yaml) {
         //check file exists
         File file = new File(yaml);
